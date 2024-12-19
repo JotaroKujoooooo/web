@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <link href="styles.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        .product-list, .product-form {
+            width: 48%;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-form input, .product-form select, .product-form textarea, .product-form button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .product-form button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            height: 50px;
+        }
+
+        .product-form button:hover {
+            background-color: #45a049;
+        }
+
+        .product-list h2, .product-form h3 {
+            text-align: center;
+            color: #333;
+        }
+
+        .product-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .product-list li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .product-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .product-item img {
+            max-width: 100px;
+            margin-right: 20px;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-item button {
+            margin-left: 10px;
+            background-color: #FF6347;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .product-item button:hover {
+            background-color: #E53E3E;
+        }
+
+        .product-item .edit-button {
+            background-color: #FFD700;
+        }
+
+        .product-item .edit-button:hover {
+            background-color: #FFB600;
+        }
+    </style>
+</head>
+<body>
+    <a style="padding-left: 45%; font-size: 30px;" href="index.html">На главную</a>
+    <div class="container">
+        <!-- Список товаров -->
+        <div class="product-list" id="product-list">
+            <h2>Список товаров</h2>
+            <ul id="product-items"></ul>
+        </div>
+
+        <div class="product-form">
+            <h3>Добавить товар</h3>
+            <form id="add-product-form">
+                <input type="hidden" id="id" value="3fa85f64-5717-4562-b3fc-2c963f66afa6"> <!-- Значение id по умолчанию -->
+                <input type="text" id="title" placeholder="Название товара" >
+                <textarea id="description" placeholder="Описание товара" ></textarea>
+                <input type="text" id="upakovka" placeholder="Упаковка" >
+                <input type="text" id="groupUpakovka" placeholder="Групповая упаковка" >
+                <input type="text" id="evropallet" placeholder="Европаллет" >
+                <input type="text" id="shtrihCode" placeholder="Штрих-код" >
+                <select id="brand">
+                    <option value="fruit">fruit</option>
+                    <option value="tornado">tornado</option>
+                </select>
+                <input type="text" id="image" placeholder="URL картинки" >
+                <button type="submit">Добавить товар</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        async function fetchProducts() {
+            try {
+                const response = await fetch('http://localhost:5096/Item/all');
+                if (!response.ok) throw new Error('Ошибка загрузки товаров');
+
+                const products = await response.json();
+                const productList = document.getElementById('product-items');
+                productList.innerHTML = '';
+
+                products.forEach(product => {
+                    const productItem = document.createElement('li');
+                    productItem.classList.add('product-item');
+
+                    productItem.innerHTML = `
+                        <div class="product-info">
+                            <h4>${product.title}</h4>
+                            <p><strong>Описание:</strong> ${product.description}</p>
+                            <p><strong>Упаковка:</strong> ${product.upakovka}</p>
+                            <p><strong>Групповая упаковка:</strong> ${product.groupUpakovka}</p>
+                            <p><strong>Европаллет:</strong> ${product.evropallet}</p>
+                            <p><strong>Штрих-код:</strong> ${product.shtrihCode}</p>
+                            <p><strong>Бренд:</strong> ${product.brand}</p>
+                            <img src="${product.image}" alt="${product.title}">
+                        </div>
+                        <div>
+                            <button class="edit-button" onclick="editProduct('${product.id}')">Изменить</button>
+                            <button onclick="deleteProduct('${product.id}')">Удалить</button>
+                        </div>
+                    `;
+
+                    productList.appendChild(productItem);
+                });
+            } catch (error) {
+                console.error(error);
+                alert('Ошибка загрузки товаров');
+            }
+        }
+
+        async function addProduct(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const upakovka = document.getElementById('upakovka').value;
+            const groupUpakovka = document.getElementById('groupUpakovka').value;
+            const evropallet = document.getElementById('evropallet').value;
+            const shtrihCode = document.getElementById('shtrihCode').value;
+            const brand = document.getElementById('brand').value;
+            const image = document.getElementById('image').value;
+            const id = document.getElementById('id').value;  
+
+            const productData = {
+                id,
+                title,
+                description,
+                upakovka,
+                groupUpakovka,
+                evropallet,
+                shtrihCode,
+                brand,
+                image
+            };
+
+            try {
+                const response = await fetch('http://localhost:5096/Item', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(productData)
+                });
+
+                if (!response.ok) throw new Error('Ошибка добавления товара');
+
+                alert('Товар добавлен');
+                fetchProducts();  
+                document.getElementById('add-product-form').reset();  // Очищаем форму
+            } catch (error) {
+                console.error(error);
+                alert('Ошибка добавления товара');
+            }
+        }
+
+        async function deleteProduct(id) {
+            try {
+                const response = await fetch(`http://localhost:5096/Item/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response.ok) throw new Error('Ошибка удаления товара');
+
+                alert('Товар удален');
+                fetchProducts();  
+            } catch (error) {
+                console.error(error);
+                alert('Ошибка удаления товара');
+            }
+        }
+
+        async function editProduct(iditem) {
+            try {
+                const title = document.getElementById('title').value;
+                const description = document.getElementById('description').value;
+                const upakovka = document.getElementById('upakovka').value;
+                const groupUpakovka = document.getElementById('groupUpakovka').value;
+                const evropallet = document.getElementById('evropallet').value;
+                const shtrihCode = document.getElementById('shtrihCode').value;
+                const brand = document.getElementById('brand').value;
+                const image = document.getElementById('image').value;
+                const id = document.getElementById('id').value;  
+
+                const productData = {
+                    id,
+                    title,
+                    description,
+                    upakovka,
+                    groupUpakovka,
+                    evropallet,
+                    shtrihCode,
+                    brand,
+                    image
+                };
+
+                const response = await fetch(`http://localhost:5096/Item/${iditem}`, {
+                   method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(productData)
+                });
+
+                if (!response.ok) throw new Error('Ошибка изменения товара');
+
+                alert('Товар изменён');
+                fetchProducts();  
+            } catch (error) {
+                console.error(error);
+                alert('Ошибка изменения товара');
+            }
+        }
+
+        document.getElementById('add-product-form').addEventListener('submit', addProduct);
+
+        fetchProducts();
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="styles.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Главная</title>
+    </head>
+    <body>
+        <div class="header">
+            <div class="header_1">
+                <img class="logo" src="https://kremlinpalace.org/photos/shares/2220023/___________________________.jpg">
+                <h1 class="name">РОСИНКА</h1>
+                <form class = "login" id="loginform">
+                    <input type="text" placeholder="Логин" id="login" required>
+                    <input type="password" placeholder="Пароль" id="password" required>
+                    <div class="buttons">
+                        <button id="enter">Войти</button>
+                        <a href="register.html">Регистрация</a>
+                    </div>
+                </form>
+                <div class = "login" id="alreadylogin" style="display: none;">
+                    <h1>Добро пожаловать</h1>
+                    <div class="buttons">
+                        <a style="display: none;" id="admin" href="admin.html">Admin</a>
+                        <a href="purchase.html">Корзина</a>
+                        <button id="logOut">Выйти</button>
+                    </div>
+                </div>
+            </div>
+            <div class="links">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="contacts.html">Контакты</a>
+                <a href="search.html">Поиск</a>
+            </div>
+        </div>
+        <div class="contacts_main">
+            <div class="main">
+                <div class="links_2">
+                    <a href="about.html">О нас</a>
+                    <a href="history.html">История фирмы</a>
+                    <a href="workers.html">Сотрудники</a>
+                    <a href="rate.html">Оставить отзыв</a>
+                </div>
+                <div class="infa">
+                    <h1>АО «Компания Росинка»</h1>
+                    <h2>Напишите нам</h2>
+                    <form class="contacts">
+                        <input type="text" placeholder="Имя" class="contacts_names" required>
+                        <input type="text" placeholder="email" class="contacts_names" required>
+                        <input type="text" placeholder="Тема" class="contacts_names" required>
+                        <input type="text" placeholder="Описание темы" class="contacts_des" required>
+                        <button>Отправить</button>
+                    </form>
+                    <table>
+                        <tr>
+                            <td>
+                                Почтовый адрес:
+                            </td>
+                            <td>
+                                Телефон / факс
+                            </td>
+                            <td>
+                                Электронная почта:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                398032, г. Липецк,Универсальный проезд, д. 11
+                            </td>
+                            <td class="phone">
+                                +7 (4742) 56-62-10<br>
+                                +7 (4742) 56-62-07 (факс)
+                            </td>
+                            <td>
+                                root@liprosinka.ru
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="map">
+                        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ac411a9aee8b645d4203241e211a7453c034e8f5d312f80664b4b8cf4aaeb94ba&amp;width=100%25&amp;height=413&amp;lang=ru_RU&amp;scroll=true"></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>©Все права защищены</p>
+       </div>
+ </body>
+    <script src="login.js"></script>
+</html>

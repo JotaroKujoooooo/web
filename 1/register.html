@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="styles.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Главная</title>
+    </head>
+    <body>
+        <div class="header">
+            <div class="header_1">
+                <img class="logo" src="https://kremlinpalace.org/photos/shares/2220023/___________________________.jpg">
+                <h1 class="name">РОСИНКА</h1>
+                
+            </div>
+            <div class="links">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="contacts.html">Контакты</a>
+                <a href="search.html">Поиск</a>
+            </div>
+        </div>
+        <div class="main">
+            <div class="links_2">
+                <a href="about.html">О нас</a>
+                <a href="history.html">История фирмы</a>
+                <a href="workers.html">Сотрудники</a>
+                <a href="rate.html">Оставить отзыв</a>
+            </div>
+            <div class="infa">
+                <h1>Регистрация</h1>
+                <form class="register" id="register">
+                    <input type="text" placeholder="Логин" class="contacts_names" id="login" required>
+                    <input type="text" placeholder="email" class="contacts_names" id="email" required>
+                    <input type="password" placeholder="Пароль" class="contacts_names" id="pass" required>
+                    <input type="password" placeholder="Повторите пароль" class="contacts_names" id="passagain" required>
+                    <button id="reg">Зарегистрироваться</button>
+                </form>
+                <h1 id="alerts"></h1>
+            </div>
+        </div>
+        <div class="footer">
+            <p>©Все права защищены</p>
+       </div>
+    </body>
+
+    <script>
+        document.getElementById("reg").addEventListener("click", async e => {
+            e.preventDefault();
+
+            if (document.getElementById("pass").value === document.getElementById("passagain").value) {
+                const response = await fetch("http://localhost:5096/User/reg", {
+                    method: "POST",
+                    headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                        login: document.getElementById("login").value,
+                        password: document.getElementById("pass").value,
+                        email: document.getElementById("email").value
+                    })
+                });
+
+                if (response.ok === true) {
+                    document.getElementById("alerts").innerText = "Вы зарегистрированы";
+                    document.getElementById("register").style.display = "none";
+                }
+                else {
+                    document.getElementById("alerts").innerText = "Такой логин уже используется!";
+                }
+            }
+            else {
+                document.getElementById("alerts").innerText = "Пароли не совпадают";
+            }
+            
+        });
+    </script>
+</html>

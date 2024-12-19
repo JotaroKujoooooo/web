@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="styles.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Подробное описание товара</title>
+    </head>
+    <body>
+        <div class="header">
+            <div class="header_1">
+                <img class="logo" src="https://kremlinpalace.org/photos/shares/2220023/___________________________.jpg">
+                <h1 class="name">РОСИНКА</h1>
+                <form class = "login" id="loginform">
+                    <input type="text" placeholder="Логин" id="login" required>
+                    <input type="password" placeholder="Пароль" id="password" required>
+                    <div class="buttons">
+                        <button id="enter">Войти</button>
+                        <a href="register.html">Регистрация</a>
+                    </div>
+                </form>
+                <div class = "login" id="alreadylogin" style="display: none;">
+                    <h1>Добро пожаловать</h1>
+                    <div class="buttons">
+                        <a style="display: none;" id="admin" href="admin.html">Admin</a>
+                        <button id="logOut">Выйти</button>
+                    </div>
+                </div>
+            </div>
+            <div class="links">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="contacts.html">Контакты</a>
+                <a href="search.html">Поиск</a>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="links_2">
+                <a href="about.html">О нас</a>
+                <a href="history.html">История фирмы</a>
+                <a href="workers.html">Сотрудники</a>
+                <a href="rate.html">Оставить отзыв</a>
+            </div>
+            <div class="infa_tovar">
+                
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>©Все права защищены</p>
+        </div>
+
+        <script>
+            function getUrlParam(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                console.log(urlParams.get(param));
+                return urlParams.get(param);
+            }
+
+            async function fetchProductDetails(id) {
+                try {
+                    const response = await fetch(`http://localhost:5096/Item/details?id=${id}`);
+                    console.log(`http://localhost:5096/Item/details?id=${id}`);
+                    if (!response.ok) throw new Error(`Ошибка: ${response.status}`);
+                    const data = await response.json();
+
+
+                    return data[0];
+                } catch (error) {
+                    console.error(error);
+                    return null;
+                }
+            }
+            function renderProductDetails(product) {
+                const container = document.querySelector('.infa_tovar');
+                if (!product) {
+                    container.innerHTML = `<p>Ошибка: данные о товаре не найдены.</p>`;
+                    return;
+                }
+                console.log(product.title);
+                container.innerHTML = `
+                    <h1>${product.title}</h1>
+                    <div class="text_and_pic">
+                        <img src="${product.image}" class="pic_of_tovar" alt="${product.title}">
+                        <p>${product.description}</p>
+                    </div>
+                    <ul>Подробное Описание
+                        <li>Упаковка - ${product.upakovka}</li>
+                        <li>Групповая упаковка - ${product.groupUpakovka}</li>
+                        <li>Европаллет - ${product.evropallet}</li>
+                        <li>Штрих-код - ${product.shtrihCode}</li>
+                    </ul>
+                `;
+            }
+
+            document.addEventListener('DOMContentLoaded', async () => {
+                
+                key = localStorage.getItem("accessToken");
+                if (key!==null) {
+                    toggleElements(true)
+                }
+               
+                const productId = getUrlParam('id');
+                if (!productId) {
+                    document.querySelector('.infa_tovar').innerHTML = `<p>Ошибка: id товара не указан.</p>`;
+                    return;
+                }
+
+                const product = await fetchProductDetails(productId);
+                renderProductDetails(product);
+            });
+
+            function toggleElements(isLoggedIn) {
+                document.getElementById('loginform').style.display = isLoggedIn ? "none" : "block";
+                document.getElementById('alreadylogin').style.display = isLoggedIn ? "block" : "none";
+                document.getElementById("admin").style.display = isLoggedIn && localStorage.getItem("nickname") === "admin" ? "block" : "none";
+            }
+
+            document.getElementById("logOut").addEventListener("click", e => {
+                e.preventDefault();
+                localStorage.removeItem("accessToken");
+                localStorage.removeItem("nickname");
+                toggleElements(false)
+            });
+
+            document.getElementById("enter").addEventListener("click", async e => {
+                e.preventDefault();
+                const response = await fetch("http://localhost:5096/User/login", {
+                    method: "POST",
+                    headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                        login: document.getElementById("login").value,
+                        password: document.getElementById("password").value,
+                        email: "string"
+                    })
+                });
+
+                if (response.ok === true) {
+                    const data = await response.json();
+                    localStorage.setItem("accessToken", data.token);
+                    localStorage.setItem("nickname", data.username);
+                    toggleElements(true)
+                }
+            });
+        </script>
+      
+ </body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="styles.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Каталог</title>
+    </head>
+    <body>
+        <div class="header">
+            <div class="header_1">
+                <img class="logo" src="https://kremlinpalace.org/photos/shares/2220023/___________________________.jpg">
+                <h1 class="name">РОСИНКА</h1>
+                <form class = "login" id="loginform">
+                    <input type="text" placeholder="Логин" id="login" required>
+                    <input type="password" placeholder="Пароль" id="password" required>
+                    <div class="buttons">
+                        <button id="enter">Войти</button>
+                        <a href="register.html">Регистрация</a>
+                    </div>
+                </form>
+                <div class = "login" id="alreadylogin" style="display: none;">
+                    <h1>Добро пожаловать</h1>
+                    <div class="buttons">
+                        <a style="display: none;" id="admin" href="admin.html">Admin</a>
+                        <a href="purchase.html">Корзина</a>
+                        <button id="logOut">Выйти</button>
+                    </div>
+                </div>
+            </div>
+            <div class="links">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="contacts.html">Контакты</a>
+                <a href="search.html">Поиск</a>
+            </div>
+        </div>
+        <div class="main">
+            <div class="links_2">
+                <a href="about.html">О нас</a>
+                <a href="history.html">История фирмы</a>
+                <a href="workers.html">Сотрудники</a>
+                <a href="rate.html">Оставить отзыв</a>
+            </div>
+            <div class="infa">
+                <h1>Каталог</h1>
+                <div class="full_tov_block">
+                    <div class="text_and_pic">
+                        <img src="https://cdn.prod.website-files.com/5c7e4dd2d0f1df55d8c4764a/5cb47079bba38c0e820fe0c1_frutmotove.svg" class="pic">
+                        <p class="products_des">Ты то, что ты пьешь. Какой напиток лучше всего выбрать на каждый день, чтобы было и вкусно, и полезно? Весь мир уже знает ответ на этот вопрос: конечно напитки безалкогольные с содержанием сока идеально вписывающиеся в глобальный тренд на здоровый образ жизни!
+                            Натуральная польза и кладовая витаминов для детей и взрослых — без  консервантов. Только натуральный сок и чистейшая питьевая вода.
+                            </p>
+                    </div>
+                    <div class="tovary" id="fruit-block"></div>
+                </div>
+                <div class="full_tov_block">
+                    <div class="text_and_pic">
+                        <img src="https://cdn.prod.website-files.com/5c7e4dd2d0f1df55d8c4764a/642fe731474a9cb69868c94b_storm%20logo.png" class="pic">
+                        <p class="products_des">
+                        Напитки безалкогольные тонизирующие энергетические газированные.
+                        Обладают приятным вкусом, придают бодрость и активность, увеличивают скорость реакции, повышают физическую выносливость, эмоциональное состояние и настроение. Дарят мощный заряд энергии, которого хватает на целый день.
+                        </p>
+                    </div>
+                    <div class="tovary" id="tornado-block"></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>©Все права защищены</p>
+       </div>
+    </body>
+
+    
+
+    <script>
+        async function placeOrder(id) {
+            const login = localStorage.getItem("nickname");
+            try {
+                console.log(id);
+                console.log(login);
+                const response = await fetch(`http://localhost:5096/Item/place?idItem=${id}&Login=${login}`);
+
+                if (!response.ok) {
+                    throw new Error('Ошибка при оформлении заказа');
+                }
+
+                alert('Товар добавлен в корзину!');
+            } 
+            catch (error) {
+                console.error(error);
+                alert('Не удалось оформить заказ');
+            }
+        }
+
+        async function fetchProducts(brand) {
+            const response = await fetch(`http://localhost:5096/Item/allbrand?_brand=${brand}`);
+            if (!response.ok) {
+                console.error(`Ошибка загрузки данных для бренда ${brand}: ${response.status}`);
+                return [];
+            }
+            return response.json();
+        }
+    
+        function renderProducts(products, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = ''; 
+            products.forEach(product => {
+                const item = document.createElement('div');
+                item.className = 'tovar';
+                item.innerHTML = `
+                    <img src="${product.image}" alt="Товар">
+                    <a href="more.html?id=${product.id}"><figcaption>Подробнее</figcaption></a>
+                    <button onclick="placeOrder('${product.id}')"><figcaption>Купить</figcaption></button>
+                `;
+                container.appendChild(item);
+            });
+        }
+    
+        async function loadProducts() {
+            const fruitProducts = await fetchProducts('fruit');
+            const tornadoProducts = await fetchProducts('tornado');
+            
+            renderProducts(fruitProducts, 'fruit-block');
+            renderProducts(tornadoProducts, 'tornado-block');
+        }
+
+
+        function toggleElements(isLoggedIn) {
+            document.getElementById('loginform').style.display = isLoggedIn ? "none" : "block";
+            document.getElementById('alreadylogin').style.display = isLoggedIn ? "block" : "none";
+            document.getElementById("admin").style.display = isLoggedIn && localStorage.getItem("nickname") === "admin" ? "block" : "none";
+        }
+        window.onload = async function() {
+            let key = localStorage.getItem("accessToken");
+            if (key!==null) {
+                toggleElements(true)
+            }
+
+            loadProducts();
+        }
+        document.getElementById("logOut").addEventListener("click", e => {
+            e.preventDefault();
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("nickname");
+            toggleElements(false)
+        });
+
+        document.getElementById("enter").addEventListener("click", async e => {
+            e.preventDefault();
+            const response = await fetch("http://localhost:5096/User/login", {
+                method: "POST",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    login: document.getElementById("login").value,
+                    password: document.getElementById("password").value,
+                    email: "string"
+                })
+            });
+
+            if (response.ok === true) {
+                const data = await response.json();
+                localStorage.setItem("accessToken", data.token);
+                localStorage.setItem("nickname", data.username);
+                toggleElements(true)
+            }
+        });
+    </script>
+    
+    
+</html>

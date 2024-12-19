@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="styles.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Главная</title>
+
+        <style>
+            .slider-container {
+                position: relative;
+                max-width: 100%; 
+                margin: 0 auto;
+                width: 100%;
+                max-height: 100%; 
+            }
+
+            .slider {
+                display: flex;
+                overflow: hidden;
+            }
+
+            .slide {
+                display: none;
+                width: 100%;
+            }
+
+            .slide img {
+                width: 100%; 
+                height: auto;
+                max-height: 100%;
+                object-fit: cover; 
+            }
+            
+            .prev {
+                left: 0;
+            }
+
+            .next {
+                right: 0;
+            }
+
+            .prev:hover, .next:hover {
+                background-color: rgba(0, 0, 0, 0.7);
+            }
+            .prev, .next {
+                position: absolute;
+                top: 50%;
+                padding: 16px;
+                color: white;
+                background-color: rgba(0, 0, 0, 0.5);
+                border: none;
+                cursor: pointer;
+                font-size: 24px;
+                z-index: 10;
+                height: 100px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <div class="header_1">
+                <img class="logo" src="https://kremlinpalace.org/photos/shares/2220023/___________________________.jpg">
+                <h1 class="name">РОСИНКА</h1>
+                <form class = "login" id="loginform">
+                    <input type="text" placeholder="Логин" id="login" required>
+                    <input type="password" placeholder="Пароль" id="password" required>
+                    <div class="buttons">
+                        <button id="enter">Войти</button>
+                        <a href="register.html">Регистрация</a>
+                    </div>
+                </form>
+                <div class = "login" id="alreadylogin" style="display: none;">
+                    <h1>Добро пожаловать</h1>
+                    <div class="buttons">
+                        <a style="display: none;" id="admin" href="admin.html">Admin</a>
+                        <a href="purchase.html">Корзина</a>
+                        <button id="logOut">Выйти</button>
+                    </div>
+                </div>
+            </div>
+            <div class="links">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="contacts.html">Контакты</a>
+                <a href="search.html">Поиск</a>
+            </div>
+        </div>
+        <div class="main">
+            <div class="links_2">
+                <a href="about.html">О нас</a>
+                <a href="history.html">История фирмы</a>
+                <a href="workers.html">Сотрудники</a>
+                <a href="rate.html">Оставить отзыв</a>
+            </div>
+            <div class="infa">
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="https://cdn.prod.website-files.com/5c7e5625d43a3e0834b48daf/66dae3aa0ffe40dbf1e5c388_6687c40c1cb1fc5a70e39f27_2024-07-05_12-54-49.png" alt="Фотография 1">
+                        </div>
+                        <div class="slide">
+                            <img src="https://proactions.ru/_ipx/f_jpeg,s_1536x1045/https://proactions.ru/media/actions/2017/04/02/bjxuamb0.jpg" alt="Фотография 2">
+                        </div>
+                        <div class="slide">
+                            <img src="https://irecommend.ru/sites/default/files/imagecache/copyright1/user-images/243735/awsMOH4PYtjbIcTGWgEA.jpg" alt="Фотография 3">
+                        </div>
+                    </div>
+                    <button class="prev" onclick="moveSlide(-1)">L</button>
+                    <button class="next" onclick="moveSlide(1)">R</button>
+                </div>
+                <p>Все напитки «Компании Росинка» - это беспрецедентный уровень чистоты производства без использования консервантов.
+                    Мы делаем полезные и безопасные напитки, в которых сохранены свойства растительных ингредиентов, натуральных экстрактов и ароматизаторов. 
+                    Для производства мы используем только чистейшую питьевую или минеральную воду.</p>
+                <div class="text_and_pic">
+                    <img src="https://cdn.prod.website-files.com/5c7e5625d43a3e0834b48daf/5d160eb2d6399616eb90ebc2_nYV8ZBGxLpsJOKExKI0F5PiJm03uPMK39A5QAjiR99ndrE8VdSJoZv2e1wyd-Pl3V3RZO1yf3a8wE1pjtILXeGKwjuyoft5OUBjFOG4M-U0C5gnMzlR_Lv-EIBRaeAQrWjYH8JB6.png" class="pic2">
+                    <p>«Фрутмотив» идеально вписывается в образ жизни современного человека: он содержит исключительно чистую питьевую воду, натуральные фруктовые соки, ароматизаторы и минимум сахара.
+                        Напитки безалкогольные с содержанием сока - это глобальный тренд на здоровый образ жизни.</p>
+                </div>
+                <p>Напитки безалкогольные тонизирующие энергетические газированные. Обладают приятным вкусом, придают бодрость и активность, увеличивают скорость реакции, повышают физическую выносливость, эмоциональное состояние и настроение. Дарят мощный заряд энергии, которого хватает на целый день.</p>   
+                <p>Холодный чай IceTea — уникальный по своей натуральности и пользе напиток без консервантов. Асептическая линия производства позволяет сохранить все полезные свойства растительных экстрактов и натуральных ингредиентов.
+
+                    Для его производства используется высококлассный настоящий зелёный и чёрный экстракт чая.
+                    
+                    IceTea-это только экстракт чая, чистейшая питьевая вода, натуральные ароматизаторы и немного лимонной кислоты для раскрытия полноты вкуса напитка.</p> 
+                <p>Вода минеральная природная питьевая лечебно-столовая «Липецкая» считается одной из лучших по медико-биологическим показателям не только в России. Мы добываем ее из подземного источника глубиной 601 метр.
+                    Вода разливается в непосредственной близости от источника добычи воды (скважины питьевой и минеральной воды находятся на расстоянии 145-250 м от отделения водоподготовки цеха розлива), а значит сохраняет в первозданном виде свою чистоту, особый яркий вкус, и все ценные полезные свойства.
+                </p>
+                <p>Напитки безалкогольные на основе минеральной природной воды «Липецкая Росинка» - низкокалорийный напиток для активных и спортивных: минеральная вода помогает восстановить водно-солевой баланс и утолить жажду, а натуральный сок — получить удовольствие от яркого вкуса. Плюс совсем немного сахара для сбалансированной работы организма.</p>
+                <p>Напитки безалкогольные сильногазированные  с классическим вкусом, приготовлены из высококачественного сырья никого не оставят равнодушными. Вкус знакомый с детства каждому, утоляет жажду и пробуждает ностальгию по временам любимых советских лимонадов.</p>
+            </div>
+        </div>
+    <div class="footer">
+         <p>©Все права защищены</p>
+    </div>
+    </body>
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex-1].style.display = "block";
+            setTimeout(showSlides, 3000); 
+        }
+
+        function moveSlide(n) {
+            let slides = document.getElementsByClassName("slide");
+            slideIndex += n;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            if (slideIndex < 1) { slideIndex = slides.length; }
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex-1].style.display = "block";
+        }
+
+        showSlides();
+    </script>
+    <script src="login.js"></script>
+</html>

@@ -1,0 +1,323 @@
+body{
+    background-color: #f8f8f8;
+    min-height: 100%;
+}
+h1
+{
+    text-align: center;
+}
+td
+{
+    width: 60px; 
+    height:60px; 
+    border: solid 1px silver; 
+    text-align:center;
+    font-size: large;
+}
+a
+{
+    color:rgb(255, 0, 0);
+    font-size: 25px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: none; 
+}
+a:hover
+{
+    color:rgb(0, 112, 209)
+}
+ul
+{
+    list-style: none;
+}
+.radios{
+    display: flex;
+}
+.infa_rate input, textarea
+{
+    margin-bottom: 2%;
+}
+.rate_names{
+    height:2vh
+}
+.infa_rate button
+{
+    width: 10vw;
+    height:3vh;
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+.rate_des
+{
+    height:10vh;
+}
+.infa_tovar
+{
+    display: block;
+    width:60vw;
+    margin-left: 1vw;
+}
+.infa_rate{
+    display: block;
+    width:60vw;
+    margin-left: 1vw;
+}
+.infa_rate form
+{
+    display: grid;
+}
+.infa_rate p
+{
+    font-size: larger;
+    text-align: center;
+}
+.infa_tovar h1{
+    color:black;
+    font-size: 18px;
+    font-weight: 400;
+    background-color: #eaeaea;
+}
+.infa_tovar p
+{
+    color:#707070;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 16px;
+}
+.infa_tovar ol, ul, li
+{
+    color:#484343;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+}
+.infa_tovar li
+{
+    list-style-type:"⚡ ";
+}
+.contacts_main input
+{
+    font-size: 18px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.header
+{
+    display:grid;
+}
+.header_1
+{
+    background-color: #99ff99;
+    width:80%;
+    margin:0 auto;
+    height: 15vh;
+    display: flex;
+}
+.logo
+{
+    width:15%;
+    margin-top:auto;
+    margin-bottom:auto;
+    margin-left: 2vw;
+}
+.name{
+    font-size: 300%;
+    margin:auto;
+}
+.login{
+    display:grid;
+    margin-right:10%;
+    margin-top: 1%;
+}
+.login input, button
+{
+    margin-top:2%; 
+    height: 2.5vh
+}
+.login button{
+    width: 40%;
+}
+.links
+{
+    background-color: #77ff77;
+    height:5vh;
+    width:80%;
+    margin:0 auto;
+    display: flex;
+}
+.links a
+{
+    margin: auto;
+    text-align: center;
+}
+.main{
+    margin-left: 10vw;
+    display: flex;
+    margin-top: 2vh;
+    width:80vw;
+}
+.links_2
+{
+    display: grid;
+    width: 10vw;
+    text-align: center;
+    padding-top: 2vh;
+    height:30vh;
+}
+.infa
+{
+    display: block;
+    width:60vw;
+    margin-left: 1vw;
+}
+.text_and_pic
+{
+    display:flex;   
+}
+.pic
+{
+    width:100%;
+    margin:1%;
+}
+.pic2
+{
+    width: 40%;
+    margin: 1%;
+}
+.products_des{
+    font-size: 150%;
+    text-align: left;
+    width:auto;
+    margin-left:2vw
+}
+.tovary{
+    display: flex;
+    width:100%;
+    margin-bottom: 1vh;
+}
+.tovar
+{
+    display: grid;
+    justify-items: center
+}
+.tovar img{
+    width:55%;
+    display: flex;
+}
+.tovar button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    height: 100%;
+    width: 25%;
+}
+
+.tovar button:hover {
+    background-color: #45a049;
+}
+.full_tov_block{
+    margin-bottom: 5%;
+}
+.footer
+{
+    display: flex;
+    width: 80vw;
+    height:5vh;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+.footer p{
+    margin-left: auto;
+    margin-right: auto;
+}
+.pic_of_tovar
+{
+    height:50vh;
+}
+.contacts
+{
+    display: grid;
+    margin: 2%;
+}
+.contacts_names{
+    height:2vh
+}
+.contacts button
+{
+    width: 10vw;
+    height:3vh;
+    margin-top: 0;
+}
+.contacts_des
+{
+    height:10vh;
+}
+.phone{
+    width:200vw;
+}
+.map
+{
+    margin-top: 1vh;
+}
+.products{
+    display:flex;
+    width:33%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.about_p{
+    margin-left: 2vw;
+}
+.about .text_and_pic{
+    margin-bottom: 3%;
+}
+.years
+{
+    font-size:400%;
+    text-align: center;
+}
+.workers{
+    width:60vw;
+}
+.workers td
+{
+    font-size: 200%;
+}
+.buttons{
+    display: flex;
+}
+.buttons a
+{
+    font-size: large;
+    text-decoration:underline;
+    margin-top:3%;
+    margin-left: 5%;
+}
+.register
+{
+    display:grid;
+}
+.register input{
+    font-size: 18px;
+    height:3vh;
+    margin-bottom: 2%;
+}
+.search{
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+}
+.search input, button
+{
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.search input{
+    width:60%;
+    height:5vh;
+}
+.search button{
+    width:20%;
+}

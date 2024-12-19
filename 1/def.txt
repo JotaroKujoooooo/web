@@ -1,0 +1,37 @@
+                    <div class="tovary">
+                        <div class="tovar">
+                            <img src="https://cdn.prod.website-files.com/5c7e5625d43a3e0834b48daf/6687be6d18ba55beae426d51_Кокос-карамель_15_для%20сайта-p-800.png">
+                            <a href="file1.html"><figcaption>Подробнее</figcaption></a>
+                        </div>
+                        <div class="tovar">
+                            <img src="https://cdn.prod.website-files.com/5c7e5625d43a3e0834b48daf/6718d46e6e9d45c1f840b19b_клубника%20тоффи%20для%20сайта-p-800.png">
+                            <a href="file2.html"><figcaption >Подробнее</figcaption></a>
+                        </div>
+                        <div class="tovar">
+                            <img src="https://cdn.prod.website-files.com/5c7e5625d43a3e0834b48daf/668beec3b50f6662d515de39_вишня_Ивлев_для%20сайта-p-800.png">
+                            <a href="file3.html"><figcaption >Подробнее</figcaption></a>
+                        </div>
+                        <div class="tovar">
+                            <img src="https://cdn.prod.website-files.com/5c7e5625d43a3e0834b48daf/668cc2c07aae7d2695a8c24c_ягода_Ивлев_для%20сайта-p-800.png">
+                            <a href="file4.html"><figcaption >Подробнее</figcaption></a>
+                        </div>
+                        <div class="tovar">
+                            <img src="https://cdn.prod.website-files.com/5c7e5625d43a3e0834b48daf/6716554615f0970c2a7574e1_яблоко_Ивлева_для%20сайта_новый-p-800.png">
+                            <a href="file5.html"><figcaption >Подробнее</figcaption></a>
+                        </div>
+                    </div>
+
+                    <div class="tovary">
+                        <div class="tovar">
+                            <img src="https://cdn.prod.website-files.com/5c7e5625d43a3e0834b48daf/6718b4a2df181b036e0162bc_mango.png" >
+                            <a href="energos1.html"><figcaption>Подробнее</figcaption></a>
+                        </div>
+                        <div class="tovar">
+                            <img src="https://cdn.prod.website-files.com/5c7e5625d43a3e0834b48daf/6718aca383c513e92e1e4ee6_energy.png" >
+                            <a href="energos3.html"><figcaption>Подробнее</figcaption></a>
+                        </div>
+                        <div class="tovar">
+                            <img src="https://cdn.prod.website-files.com/5c7e5625d43a3e0834b48daf/6718adee13c1aeb17e40b385_original.png" >
+                            <a href="energos2.html"><figcaption>Подробнее</figcaption></a>
+                        </div>
+                    </div>
